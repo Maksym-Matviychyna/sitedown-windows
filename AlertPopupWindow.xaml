@@ -1,0 +1,84 @@
+<Window x:Class="SiteDownWindows.AlertPopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Width="430" Height="176"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Border Background="#080B18"
+            CornerRadius="3"
+            BorderBrush="#343BA8"
+            BorderThickness="1"
+            Padding="16"
+            MouseLeftButtonUp="Notification_Click">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="24" ShadowDepth="4" Opacity="0.25"/>
+        </Border.Effect>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="62"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Width="54"
+                    Height="54"
+                    CornerRadius="3"
+                    Background="#343BA8"
+                    VerticalAlignment="Top"
+                    ClipToBounds="True">
+                <Image Source="Assets/sitedown-source.png" Stretch="UniformToFill"/>
+            </Border>
+
+            <StackPanel Grid.Column="1" Margin="12,0,8,0">
+                <TextBlock x:Name="TitleTextBlock"
+                           Foreground="#F5F7FF"
+                           FontSize="15"
+                           FontWeight="Black"
+                           TextWrapping="Wrap"/>
+
+                <TextBlock x:Name="MessageTextBlock"
+                           Foreground="#C9CDE2"
+                           FontSize="13"
+                           TextWrapping="Wrap"
+                           Margin="0,7,0,0"
+                           MaxHeight="64"/>
+
+                <Border Background="#343BA8"
+                        CornerRadius="3"
+                        Padding="13,7"
+                        HorizontalAlignment="Left"
+                        Margin="0,12,0,0"
+                        Cursor="Hand"
+                        MouseLeftButtonUp="SeeDetailsButton_Click">
+                    <TextBlock Text="See the details"
+                               Foreground="White"
+                               FontSize="12"
+                               FontWeight="SemiBold"/>
+                </Border>
+            </StackPanel>
+
+            <Border Grid.Column="2"
+                    Width="26"
+                    Height="26"
+                    CornerRadius="3"
+                    Background="#10121F"
+                    VerticalAlignment="Top"
+                    Cursor="Hand"
+                    MouseLeftButtonUp="CloseButton_Click">
+                <TextBlock Text="×"
+                           Foreground="#C9CDE2"
+                           FontSize="18"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="0,-2,0,0"/>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

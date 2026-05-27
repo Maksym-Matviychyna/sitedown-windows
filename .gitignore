@@ -1,0 +1,46 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+
+# Publish output
+publish/
+installer/
+*.msix
+*.msixbundle
+*.appx
+*.appxbundle
+
+# User-specific files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Signing certificates / secrets
+*.pfx
+*.p12
+*.snk
+*.key
+*.pem
+*.crt
+*.cer
+
+# Rider
+.idea/
+*.sln.iml

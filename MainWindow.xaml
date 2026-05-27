@@ -1,0 +1,331 @@
+<Window x:Class="SiteDownWindows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="SiteDown" Height="760" Width="1080" MinHeight="640" MinWidth="930"
+        Icon="Assets/sitedown.ico"
+        WindowStartupLocation="CenterScreen" Background="#000000">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#10121F">
+            <Grid Margin="28">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel>
+                    <Border Width="82" Height="82" CornerRadius="3" Background="#343BA8" HorizontalAlignment="Left" ClipToBounds="True">
+                        <Image Source="Assets/sitedown-source.png" Stretch="UniformToFill"/>
+                    </Border>
+                    <TextBlock Text="SiteDown" Foreground="White" FontSize="34" FontWeight="Black" Margin="0,22,0,0"/>
+                    <TextBlock Text="Windows monitor" Foreground="#AEB4D6" FontSize="14" Margin="0,6,0,0"/>
+                    <TextBlock Text="Checks your websites and notifies you when a website is down."
+                               Foreground="#D6D9F0" FontSize="14" TextWrapping="Wrap" Margin="0,28,0,0" LineHeight="22"/>
+                    <Button x:Name="SetupButton"
+                            Content="Setup"
+                            Background="White"
+                            Foreground="#10121F"
+                            FontSize="20"
+                            Height="62"
+                            Margin="0,24,0,0"
+                            Click="SetupButton_Click"/>
+                    <Button x:Name="HelpButton"
+                            Content="Help"
+                            Background="White"
+                            Foreground="#10121F"
+                            FontSize="15"
+                            Height="56"
+                            Margin="0,12,0,0"
+                            Click="HelpButton_Click"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2">
+                    <Button x:Name="DashboardButton"
+                            Content="Visit website"
+                            Background="White"
+                            Foreground="#10121F"
+                            FontSize="15"
+                            Height="56"
+                            Click="DashboardButton_Click"/>
+                    <TextBlock Text="www.sitedown.app" Foreground="#8F96BF" FontSize="12" Margin="0,12,0,0" TextWrapping="Wrap"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Grid x:Name="MainContentGrid" Grid.Column="1" Margin="34">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Border x:Name="UpdateBlock"
+                    Grid.Row="0"
+                    Visibility="Collapsed"
+                    Background="#F6C945"
+                    BorderBrush="#FFD966"
+                    BorderThickness="1"
+                    CornerRadius="3"
+                    Padding="16"
+                    Margin="0,0,0,18">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="130"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock x:Name="UpdateTextBlock"
+                               Text="New version is available"
+                               Foreground="#10121F"
+                               FontSize="16"
+                               FontWeight="Black"
+                               VerticalAlignment="Center"/>
+
+                    <Button Grid.Column="1"
+                            x:Name="UpdateButton"
+                            Content="Update"
+                            Background="#10121F"
+                            Foreground="White"
+                            FontSize="14"
+                            Height="38"
+                            Click="UpdateButton_Click"/>
+                </Grid>
+            </Border>
+
+            <StackPanel x:Name="TokenBlock" Grid.Row="1">
+                <TextBlock Text="Token" Foreground="{StaticResource TextBrush}" FontSize="26" FontWeight="Black"/>
+                <TextBlock Text="To set up your app, visit www.sitedown.app, create your monitoring token, then paste it below."
+                           Foreground="{StaticResource MutedBrush}" FontSize="14" TextWrapping="Wrap" Margin="0,8,0,22"/>
+
+                <Border Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource SoftBorderBrush}" BorderThickness="1" CornerRadius="3" Padding="22">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="160"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                            <TextBlock Text="Token" FontWeight="SemiBold" Foreground="{StaticResource TextBrush}" Margin="0,0,0,8"/>
+                            <Grid>
+                                <TextBox x:Name="PairKeyTextBox"
+                                         VerticalContentAlignment="Center"
+                                         TextChanged="PairKeyTextBox_TextChanged"/>
+                                <TextBlock x:Name="TokenPlaceholderTextBlock"
+                                           Text="Enter token here"
+                                           Foreground="#9AA1B8"
+                                           FontSize="14"
+                                           Margin="12,0,0,0"
+                                           VerticalAlignment="Center"
+                                           IsHitTestVisible="False"/>
+                            </Grid>
+                            <TextBlock Foreground="{StaticResource MutedBrush}"
+                                       FontSize="13"
+                                       TextWrapping="Wrap"
+                                       Margin="0,10,0,0">
+                                <Run Text="Get your token for free. No Registration needed. Visit "/>
+                                <Hyperlink NavigateUri="https://www.sitedown.app/setup/"
+                                           RequestNavigate="TokenSetupLink_RequestNavigate">
+                                    <Run Text="www.sitedown.app"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <Button Grid.Column="1" x:Name="PairButton" Content="Apply token" Margin="0,24,0,0" Click="PairButton_Click"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
+
+            <Grid Grid.Row="2" Margin="0,22,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource SoftBorderBrush}" BorderThickness="1" CornerRadius="3" Padding="18" Margin="0,0,14,0">
+                    <StackPanel>
+                        <TextBlock Text="Status" Foreground="{StaticResource MutedBrush}" FontSize="13"/>
+                        <TextBlock x:Name="StatusTextBlock" Text="No token" Foreground="{StaticResource TextBrush}" FontSize="20" FontWeight="Black" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource SoftBorderBrush}" BorderThickness="1" CornerRadius="3" Padding="18" Margin="0,0,14,0">
+                    <StackPanel>
+                        <TextBlock Text="Websites" Foreground="{StaticResource MutedBrush}" FontSize="13"/>
+                        <TextBlock x:Name="SitesCountTextBlock" Text="0" Foreground="{StaticResource TextBrush}" FontSize="20" FontWeight="Black" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="{StaticResource PanelBrush}" BorderBrush="{StaticResource SoftBorderBrush}" BorderThickness="1" CornerRadius="3" Padding="18">
+                    <StackPanel>
+                        <TextBlock Text="Monitoring" Foreground="{StaticResource MutedBrush}" FontSize="13"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                            <Button x:Name="StopButton" Content="Stop" Width="84" Height="36" Style="{StaticResource SecondaryButton}" Click="StopButton_Click"/>
+                            <Button x:Name="StartButton" Content="Start" Width="84" Height="36" Margin="10,0,0,0" Click="StartButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <TabControl x:Name="MainTabsControl"
+                        Grid.Row="3"
+                        Margin="0,28,0,0"
+                        Background="Transparent"
+                        BorderBrush="{StaticResource SoftBorderBrush}"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        VerticalAlignment="Stretch">
+                <TabItem Header="Activity log" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <Border Background="#10121F"
+                            CornerRadius="3"
+                            Padding="18"
+                            BorderBrush="{StaticResource SoftBorderBrush}"
+                            BorderThickness="1"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                        <RichTextBox x:Name="LogRichTextBox"
+                                     Background="#10121F"
+                                     Foreground="#E9EBFF"
+                                     BorderThickness="0"
+                                     FontFamily="Consolas"
+                                     FontSize="13"
+                                     IsReadOnly="True"
+                                     VerticalScrollBarVisibility="Auto"
+                                     HorizontalAlignment="Stretch"
+                                     VerticalAlignment="Stretch"
+                                     Padding="12"
+                                     Focusable="False">
+                            <FlowDocument PagePadding="0"
+                                          Background="#10121F"
+                                          Foreground="#E9EBFF"/>
+                        </RichTextBox>
+                    </Border>
+                </TabItem>
+
+                <TabItem Header="Monitored websites" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                    <Border Background="{StaticResource PanelBrush}"
+                            BorderBrush="{StaticResource SoftBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="8"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch">
+                        <ListView x:Name="SitesListView"
+                                  BorderThickness="0"
+                                  Background="#080B18"
+                                  Foreground="{StaticResource TextBrush}"
+                                  VerticalAlignment="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                                    <GridViewColumn Header="URL" DisplayMemberBinding="{Binding Url}" Width="280"/>
+                                    <GridViewColumn Header="Keyword" DisplayMemberBinding="{Binding ExpectedKeyword}" Width="140"/>
+                                    <GridViewColumn Header="Interval" DisplayMemberBinding="{Binding CheckIntervalText}" Width="90"/>
+                                    <GridViewColumn Header="Enabled" DisplayMemberBinding="{Binding EnabledText}" Width="75"/>
+                                    <GridViewColumn Header="Last status" DisplayMemberBinding="{Binding LastStatus}" Width="140"/>
+                                    <GridViewColumn Header="Last checked" DisplayMemberBinding="{Binding LastCheckedText}" Width="135"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Border>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+        <Grid x:Name="HelpScreen" Grid.Column="1" Visibility="Collapsed" Background="#050712">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="34">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="44"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="SiteDown Help"
+                                   Foreground="White"
+                                   FontSize="34"
+                                   FontWeight="Black"
+                                   VerticalAlignment="Center"/>
+
+                        <Button Grid.Column="1"
+                                Content="×"
+                                Background="#10121F"
+                                Foreground="#E9EBFF"
+                                BorderBrush="#343BA8"
+                                BorderThickness="1"
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Width="36"
+                                Height="36"
+                                Padding="0"
+                                ToolTip="Close help"
+                                Click="HelpBackButton_Click"/>
+                    </Grid>
+
+                    <TextBlock Text="Website monitoring with alerts"
+                               Foreground="#C9CDE2"
+                               FontSize="22"
+                               Margin="0,20,0,16"/>
+
+                    <Border Background="#080B18"
+                            BorderBrush="#171A4E"
+                            BorderThickness="1"
+                            CornerRadius="3"
+                            Padding="22">
+                        <StackPanel>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="28"
+                                       Text="SiteDown checks your websites and notifies you when a website appears to be down or when the expected keyword is missing from the page."/>
+
+                            <TextBlock Text="How setup works" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,28,0,12"/>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="30">
+                                <Run Text="1. Go to www.sitedown.app"/><LineBreak/>
+                                <Run Text="2. Create your monitoring token"/><LineBreak/>
+                                <Run Text="* It's free and no registration needed"/><LineBreak/>
+                                <Run Text="3. Open this app"/><LineBreak/>
+                                <Run Text="4. Press Setup"/><LineBreak/>
+                                <Run Text="5. Paste the token into the token field"/><LineBreak/>
+                                <Run Text="6. Press Apply Token"/>
+                            </TextBlock>
+
+                            <TextBlock Text="How monitoring works" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,28,0,12"/>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="30"
+                                       Text="After the token is applied, the app receives your website monitoring settings. When you press START, SiteDown checks each configured website using its saved URL, expected keyword, and check interval."/>
+
+                            <TextBlock Text="Alerts" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,28,0,12"/>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="30"
+                                       Text="If the website is offline or the expected keyword is not found, the app sends an alert."/>
+
+                            <TextBlock Text="Reset" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,28,0,12"/>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="30"
+                                       Text="Use Reset to stop monitoring, remove the token, and clear saved website settings from the app."/>
+
+                            <TextBlock Text="Privacy" Foreground="White" FontSize="24" FontWeight="Black" Margin="0,28,0,12"/>
+                            <TextBlock Foreground="#C9CDE2" FontSize="19" TextWrapping="Wrap" LineHeight="30"
+                                       Text="SiteDown is free and does not require registration. It does not collect any data. You are using this app anonymously. Monitoring parameters that you enter, are stored only on your device. Once you apply your token, it is deleted from the system."/>
+
+                            <TextBlock Foreground="White" FontSize="20" FontWeight="Black" TextWrapping="Wrap" Margin="0,34,0,0">
+                                <Run Text="For more information visit "/>
+                                <Hyperlink NavigateUri="www.sitedown.app" RequestNavigate="HelpWebsiteLink_RequestNavigate">
+                                    <Run Text="www.sitedown.app"/>
+                                </Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                    </Border>
+
+                    <Button Content="Back"
+                            Background="White"
+                            Foreground="#10121F"
+                            FontSize="20"
+                            Height="48"
+                            Margin="0,16,0,0"
+                            Click="HelpBackButton_Click"/>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>
